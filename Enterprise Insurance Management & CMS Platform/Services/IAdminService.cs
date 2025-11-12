@@ -6,4 +6,5 @@ public interface IAdminService
     Task<bool> UpdateUserRoleAsync(UpdateUserRoleDto dto);
     Task<IEnumerable<object>> GetAllUsersAsync();
     Task<IEnumerable<object>> GetAllRolesAsync();
+    Task<(bool Succeeded, IEnumerable<string>? Errors)> RegisterStaffAsync(AdminRegisterDto dto);
 }

@@ -1,6 +1,7 @@
 ﻿using Enterprise_Insurance_Management___CMS_Platform.Entities;
 using Enterprise_Insurance_Management___CMS_Platform.Helpers;
 using Enterprise_Insurance_Management___CMS_Platform.Interfaces;
+using Enterprise_Insurance_Management___CMS_Platform.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -9,14 +10,8 @@ namespace Enterprise_Insurance_Management___CMS_Platform.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController : ControllerBase
+    public class CustomerController(ICustomerDocumentRepository _documentRepo, IDocumentService _documentService) : ControllerBase
     {
-        private readonly ICustomerDocumentRepository _documentRepo;
-
-        public CustomerController(ICustomerDocumentRepository documentRepo)
-        {
-            _documentRepo = documentRepo;
-        }
 
         #region Customer APIs
 
@@ -25,38 +20,15 @@ namespace Enterprise_Insurance_Management___CMS_Platform.Controllers
         public async Task<IActionResult> UploadCustomerDocuments(IFormFileCollection files)
         {
             var userId = User.FindFirstValue("uid");
-            if (userId == null) return Unauthorized(new { message = "Please login to use this feature."});
+            if (userId == null) return Unauthorized(new { message = "Please login to use this feature." });
 
             if (files == null || files.Count == 0)
                 return BadRequest(new { message = "No files provided" });
 
-            var documents = new List<DocumentEntity>();
-
-            foreach (var file in files)
-            {
-                var fileType = FileHelper.GetFileType(file.FileName);
-                var uploadPath = FileHelper.GetUploadPath("CustomerProfile", fileType);
-
-                var fileName = $"{Guid.NewGuid()}_{file.FileName}";
-                var filePath = Path.Combine(uploadPath, fileName);
-
-                using var stream = System.IO.File.Create(filePath);
-                await file.CopyToAsync(stream);
-
-                documents.Add(new DocumentEntity
-                {
-                    FileName = file.FileName,
-                    Url = filePath,
-                    UploadedById = userId,
-                    LinkedToEntity = "CustomerProfile",
-                    LinkedEntityId = Guid.Parse(userId)
-                });
-            }
-
-            await _documentRepo.AddDocumentsAsync(documents);
-
+            var documents = await _documentService.SaveDocumentsAsync(files, userId, "CustomerProfile", Guid.Parse(userId));
             return Ok(new { message = "Documents uploaded successfully", count = documents.Count });
         }
+
 
         [Authorize(Roles = "Customer")]
         [HttpGet("my-documents")]
@@ -86,7 +58,7 @@ namespace Enterprise_Insurance_Management___CMS_Platform.Controllers
 
         #region Admin / Staff APIs
 
-        [Authorize(Roles = "Admin, Editor, ClaimsOfficer")]
+        [Authorize(Roles = "Admin, Editor, ClaimsOfficer, Agent")]
         [HttpGet("{customerId}/documents")]
         public async Task<IActionResult> GetDocumentsByCustomer(string customerId)
         {

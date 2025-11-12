@@ -10,10 +10,12 @@ namespace Enterprise_Insurance_Management___CMS_Platform.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AuthController(IAuthRepository _authRepo, UserManager<ApplicationUser> _userManager, JobTriggerService _jobTriggerService) : ControllerBase
+public class AuthController(IAuthRepository _authRepo, UserManager<ApplicationUser> _userManager, 
+                            JobTriggerService _jobTriggerService, IDocumentService _documentService) 
+                            : ControllerBase
 {
     [HttpPost("register")]
-    public async Task<IActionResult> Register(RegisterDto dto)
+    public async Task<IActionResult> Register([FromForm] RegisterDto dto)
     {
         var (succeeded, errors) = await _authRepo.RegisterAsync(dto);
         if (!succeeded)
@@ -23,9 +25,21 @@ public class AuthController(IAuthRepository _authRepo, UserManager<ApplicationUs
         if (user == null)
             return BadRequest(new { message = "User not found after registration." });
 
+        // Handle document uploads if provided
+        if (dto.Documents != null && dto.Documents.Count > 0)
+        {
+            var documents = await _documentService.SaveDocumentsAsync(
+                dto.Documents,
+                user.Id,
+                "CustomerProfile",
+                Guid.Parse(user.Id)
+            );
+        }
+
         _jobTriggerService.TriggerNewUserRegisteredJob(user.Id, TimeSpan.Zero);
         return Ok(new { message = "User registered successfully" });
     }
+
 
 
     [HttpPost("login")]

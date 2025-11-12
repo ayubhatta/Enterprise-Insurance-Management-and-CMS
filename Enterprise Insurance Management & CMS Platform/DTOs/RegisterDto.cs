@@ -9,4 +9,6 @@ public class RegisterDto
     public string Address { get; set; } = null!;
     public string NationalId { get; set; } = null!;
     public DateTime DateOfBirth { get; set; }
+    public IFormFileCollection? Documents { get; set; }
+
 }

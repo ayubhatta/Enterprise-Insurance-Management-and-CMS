@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Enterprise Insurance Management & CMS Platform")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+92c9bb1dd9a3325e4533cb8cebe256967df4e2ee")]
 [assembly: System.Reflection.AssemblyProductAttribute("Enterprise Insurance Management & CMS Platform")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Enterprise Insurance Management & CMS Platform")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

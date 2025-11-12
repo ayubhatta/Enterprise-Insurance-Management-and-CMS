@@ -170,3 +170,4 @@ C:\Users\bhatt\source\repos\Enterprise Insurance Management & CMS Platform\Enter
 C:\Users\bhatt\source\repos\Enterprise Insurance Management & CMS Platform\Enterprise Insurance Management & CMS Platform\obj\Debug\net8.0\Enterprise Insurance Management & CMS Platform.pdb
 C:\Users\bhatt\source\repos\Enterprise Insurance Management & CMS Platform\Enterprise Insurance Management & CMS Platform\obj\Debug\net8.0\Enterprise Insurance Management & CMS Platform.genruntimeconfig.cache
 C:\Users\bhatt\source\repos\Enterprise Insurance Management & CMS Platform\Enterprise Insurance Management & CMS Platform\obj\Debug\net8.0\ref\Enterprise Insurance Management & CMS Platform.dll
+C:\Users\bhatt\source\repos\Enterprise Insurance Management & CMS Platform\Enterprise Insurance Management & CMS Platform\obj\Debug\net8.0\Enterprise Insurance Management & CMS Platform.sourcelink.json

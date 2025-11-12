@@ -20,5 +20,6 @@ public static class InsuranceCMSStartup
         services.AddScoped<JobTriggerService>();
         services.AddScoped<JobService>();
         services.AddHostedService<PolicyExpiryBackgroundService>();
+        services.AddScoped<IDocumentService, DocumentService>();
     }
 }

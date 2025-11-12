@@ -37,7 +37,7 @@ namespace Enterprise_Insurance_Management___CMS_Platform.BackgroundServices
                     {
                         To = agent.Email,
                         Subject = "New Customer Verification Required",
-                        Body = $"<p>Dear Agent,</p><p>A new customer <strong>{user.UserName}</strong> has registered and requires verification.</p><p>Please review their profile.</p>"
+                        Body = $"<p>Dear Agent,</p><p>A new customer <strong>{user.UserName}</strong> with Id: <strong>{user.Id}, has registered and requires verification.</p><p>Please review their profile and documents.</p>"
                     };
                     await _emailService.SendEmailAsync(agentMail);
                 }
