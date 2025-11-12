@@ -1,0 +1,6 @@
+@Enterprise_Insurance_Management___CMS_Platform_HostAddress = http://localhost:5243
+
+GET {{Enterprise_Insurance_Management___CMS_Platform_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

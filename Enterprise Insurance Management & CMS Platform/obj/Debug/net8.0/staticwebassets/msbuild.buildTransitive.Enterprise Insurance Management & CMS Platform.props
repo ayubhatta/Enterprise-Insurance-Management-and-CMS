@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Enterprise Insurance Management &amp; CMS Platform.props" />
+</Project>

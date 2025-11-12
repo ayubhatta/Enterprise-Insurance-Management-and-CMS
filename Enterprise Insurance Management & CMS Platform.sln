@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise Insurance Management & CMS Platform", "Enterprise Insurance Management & CMS Platform\Enterprise Insurance Management & CMS Platform.csproj", "{07101392-163B-489B-87D3-C8F702EEEB08}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07101392-163B-489B-87D3-C8F702EEEB08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07101392-163B-489B-87D3-C8F702EEEB08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07101392-163B-489B-87D3-C8F702EEEB08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07101392-163B-489B-87D3-C8F702EEEB08}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {56C9A69D-0432-45B4-8C30-C93F46DF6B55}
+	EndGlobalSection
+EndGlobal
