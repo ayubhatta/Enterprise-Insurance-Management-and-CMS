@@ -37,7 +37,9 @@ public class AuthRepository(UserManager<ApplicationUser> _userManager, IConfigur
             UserId = user.Id,
             Address = dto.Address,
             NationalId = dto.NationalId,
-            DateOfBirth = dto.DateOfBirth
+            DateOfBirth = DateTime.SpecifyKind(
+                                            dto.DateOfBirth.ToDateTime(TimeOnly.MinValue),
+                                            DateTimeKind.Utc)
         };
 
         await _profileRepo.CreateAsync(profile);
@@ -45,13 +47,17 @@ public class AuthRepository(UserManager<ApplicationUser> _userManager, IConfigur
         return (true, null);
     }
 
-    public async Task<string?> LoginAsync(LoginDto dto)
+    public async Task<(string token, string role)?> LoginAsync(LoginDto dto)
     {
         var user = await _userManager.FindByEmailAsync(dto.Email);
         if (user == null || !await _userManager.CheckPasswordAsync(user, dto.Password))
             return null;
 
-        return await GenerateJwtToken(user);
+        var token = await GenerateJwtToken(user);
+        var roles = await _userManager.GetRolesAsync(user);
+        var role = roles.FirstOrDefault() ?? "Customer";
+
+        return (token, role);
     }
 
     private async Task<string> GenerateJwtToken(ApplicationUser user)
@@ -66,7 +72,7 @@ public class AuthRepository(UserManager<ApplicationUser> _userManager, IConfigur
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.UserName!),
             new Claim(JwtRegisteredClaimNames.Email, user.Email!),
-            new Claim("uid", user.Id),
+            new Claim("uid", user.Id)
             //new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
             
         };

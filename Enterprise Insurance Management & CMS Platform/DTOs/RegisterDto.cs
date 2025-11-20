@@ -8,7 +8,7 @@ public class RegisterDto
     public string Password { get; set; } = null!;
     public string Address { get; set; } = null!;
     public string NationalId { get; set; } = null!;
-    public DateTime DateOfBirth { get; set; }
+    public DateOnly DateOfBirth { get; set; }
     public IFormFileCollection? Documents { get; set; }
 
 }

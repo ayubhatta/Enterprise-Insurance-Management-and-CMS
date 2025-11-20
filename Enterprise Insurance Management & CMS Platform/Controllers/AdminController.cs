@@ -53,4 +53,87 @@ public class AdminController(IAdminService _adminService, UserManager<Applicatio
         var roles = await _adminService.GetAllRolesAsync();
         return Ok(roles);
     }
+
+    [HttpGet("role-counts")]
+    public async Task<IActionResult> GetUserRoleCounts()
+    {
+        return Ok(await _adminService.GetUserRoleCountsAsync());
+    }
+
+    [HttpGet("policies")]
+    public async Task<IActionResult> GetAllPolicies()
+    {
+        return Ok(await _adminService.GetAllPoliciesAsync());
+    }
+
+    [HttpGet("policies/active")]
+    public async Task<IActionResult> GetActivePolicies()
+    {
+        return Ok(await _adminService.GetActivePoliciesAsync());
+    }
+
+    [HttpGet("policies/inActive")]
+    public async Task<IActionResult> GetInActivePolicies()
+    {
+        return Ok(await _adminService.GetInActivePoliciesAsync());
+    }
+
+    [HttpGet("policies/expired")]
+    public async Task<IActionResult> GetExpiredPolicies()
+    {
+        return Ok(await _adminService.GetExpiredPoliciesAsync());
+    }
+
+    [HttpGet("policies/count")]
+    public async Task<IActionResult> GetTotalPolicies()
+    {
+        return Ok(new { total = await _adminService.GetTotalPoliciesAsync() });
+    }
+
+    [HttpGet("claims/counts")]
+    public async Task<IActionResult> GetClaimCounts()
+    {
+        return Ok(await _adminService.GetClaimCountsAsync());
+    }
+
+    [HttpGet("claims/submitted")]
+    public async Task<IActionResult> GetSubmittedClaims()
+    {
+        return Ok(await _adminService.GetAllSubmittedClaimsAsync());
+    }
+
+    [HttpGet("claims/approved")]
+    public async Task<IActionResult> GetApprovedClaims()
+    {
+        return Ok(await _adminService.GetAllApprovedClaimsAsync());
+    }
+
+    [HttpGet("customers")]
+    public async Task<IActionResult> GetCustomers()
+    {
+        var result = await _adminService.GetAllCustomersAsync();
+        return Ok(result);
+    }
+
+    [HttpGet("agents")]
+    public async Task<IActionResult> GetAgents()
+    {
+        var result = await _adminService.GetAllAgentsAsync();
+        return Ok(result);
+    }
+
+    [HttpGet("editors")]
+    public async Task<IActionResult> GetEditors()
+    {
+        var result = await _adminService.GetAllEditorsAsync();
+        return Ok(result);
+    }
+
+    [HttpGet("claims-officers")]
+    public async Task<IActionResult> GetClaimsOfficers()
+    {
+        var result = await _adminService.GetAllClaimsOfficersAsync();
+        return Ok(result);
+    }
+
 }

@@ -45,11 +45,18 @@ public class AuthController(IAuthRepository _authRepo, UserManager<ApplicationUs
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDto dto)
     {
-        var token = await _authRepo.LoginAsync(dto);
-        if (token == null) return Unauthorized(new { message = "Invalid credentials" });
+        var result = await _authRepo.LoginAsync(dto);
 
-        return Ok(new { token });
+        if (result == null)
+            return Unauthorized(new { message = "Invalid credentials" });
+
+        return Ok(new
+        {
+            result.Value.token,
+            result.Value.role
+        });
     }
+
 
     [Authorize(Roles = "Admin, Customer")]
     [HttpDelete("{id}")]

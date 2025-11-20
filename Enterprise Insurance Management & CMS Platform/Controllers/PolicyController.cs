@@ -15,7 +15,7 @@ namespace Enterprise_Insurance_Management___CMS_Platform.Controllers
     public class PolicyController(IPolicyRepository _repo, IDocumentRepository _documentRepo, JobTriggerService triggerService) : ControllerBase
     {
 
-        [Authorize(Roles = "Admin, Editor, Customer")]
+        //[Authorize(Roles = "Admin, Editor, Customer")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
